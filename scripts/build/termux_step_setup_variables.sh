@@ -16,6 +16,9 @@ termux_step_setup_variables() {
 	: "${TERMUX_GLOBAL_LIBRARY:="false"}"
 	: "${TERMUX_TOPDIR:="$HOME/.termux-build"}"
 	: "${TERMUX_PACMAN_PACKAGE_COMPRESSION:="xz"}"
+	package_name="com.retmux"
+	: "${TERMUX_PREFIX:="/data/data/$package_name/files/usr"}"
+	: "${TERMUX_ANDROID_HOME:="/data/data/$package_name/files/home"}"
 
 	if [ -z "${TERMUX_PACKAGE_FORMAT-}" ]; then
 		if [ "$TERMUX_ON_DEVICE_BUILD" = "true" ] && [ -n "${TERMUX_APP_PACKAGE_MANAGER-}" ]; then
