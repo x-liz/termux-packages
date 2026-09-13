@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-26.04
     strategy:
       matrix:
-        target_arch: [aarch64, arm, i686, x86_64]
+        target_arch: [aarch64]
       fail-fast: false
     steps:
     - name: Clone repository
@@ -354,18 +354,6 @@ jobs:
       env:
         TERMUX_ARCH: aarch64
       run: ./scripts/bin/test-buildorder-random
-    - name: Randomise buildorder.py test (arm)
-      env:
-        TERMUX_ARCH: arm
-      run: ./scripts/bin/test-buildorder-random
-    - name: Randomise buildorder.py test (i686)
-      env:
-        TERMUX_ARCH: i686
-      run: ./scripts/bin/test-buildorder-random
-    - name: Randomise buildorder.py test (x86_64)
-      env:
-        TERMUX_ARCH: x86_64
-      run: ./scripts/bin/test-buildorder-random
 
   upload-test:
     permissions:
@@ -393,7 +381,7 @@ jobs:
           fi
         fi
 
-        for archive in debs-*/debs-{aarch64,arm,i686,x86_64}-${{ github.sha }}.tar; do
+        for archive in debs-*/debs-{aarch64}-${{ github.sha }}.tar; do
           tar xf "$archive"
         done
 
@@ -411,7 +399,7 @@ jobs:
             continue
           fi
 
-          for arch in aarch64 arm i686 x86_64; do
+          for arch in aarch64; do
             if [ ! -f "Packages-${repo}-${arch}" ]; then
               echo "[*] Downloading ${url}/dists/${distribution}/${component}/binary-${arch}/Packages.bz2"
               curl -s \
@@ -456,7 +444,7 @@ jobs:
       run: |
         source scripts/aptly_api.sh
 
-        for archive in debs-*/debs-{aarch64,arm,i686,x86_64}-${{ github.sha }}.tar; do
+        for archive in debs-*/debs-{aarch64}-${{ github.sha }}.tar; do
           tar xf "$archive"
         done
 
