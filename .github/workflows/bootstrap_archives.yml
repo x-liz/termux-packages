@@ -20,7 +20,7 @@ jobs:
       matrix:
         arch:
           - aarch64
-    if: github.repository == 'termux/termux-packages'
+    if: github.repository == 'x-liz/termux-packages'
     steps:
       - name: Git clone
         uses: actions/checkout@v7
